@@ -3,80 +3,348 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solicitar Editor</title>
+<title>Ateliê dos Editores</title>
 
 <style>
-body{
-    font-family: Arial;
-    background:#0f0f0f;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
 
-.container{
-    background:#1a1a1a;
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#050505,#121212,#22003d);
+    color:white;
+}
+
+header{
     padding:25px;
-    border-radius:10px;
-    width:400px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.logo{
+    font-size:40px;
+    font-weight:800;
+    color:#a855f7;
+}
+
+.subtitle{
+    color:#cfcfcf;
+    margin-top:10px;
+}
+
+.hero{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h1{
+    font-size:55px;
+    max-width:900px;
+    margin:auto;
+}
+
+.hero span{
+    color:#a855f7;
+}
+
+.hero p{
+    margin-top:20px;
+    color:#bdbdbd;
+    font-size:18px;
+}
+
+.buttons{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:18px 35px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.editor{
+    background:#9333ea;
+    color:white;
+}
+
+.editor:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 25px #9333ea;
+}
+
+.cliente{
+    background:white;
+    color:black;
+}
+
+.cliente:hover{
+    transform:translateY(-5px);
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    padding:30px;
+}
+
+.card{
+    width:320px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:15px;
+    padding:25px;
+    transition:.3s;
+}
+
+.card:hover{
+    border-color:#9333ea;
+    transform:translateY(-6px);
+}
+
+.card h3{
+    color:#a855f7;
+    margin-bottom:10px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    justify-content:center;
+    align-items:center;
+}
+
+.form-box{
+    width:90%;
+    max-width:500px;
+    background:#151515;
+    padding:25px;
+    border-radius:15px;
+}
+
+.form-box h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#a855f7;
 }
 
 input,textarea{
     width:100%;
-    padding:10px;
-    margin-top:5px;
-    margin-bottom:15px;
+    padding:12px;
+    margin-bottom:12px;
     border:none;
-    border-radius:5px;
+    border-radius:8px;
+    background:#252525;
+    color:white;
 }
 
-button{
+.send{
     width:100%;
     padding:12px;
-    background:#5865F2;
-    color:white;
     border:none;
-    border-radius:5px;
+    border-radius:8px;
+    background:#9333ea;
+    color:white;
+    font-weight:bold;
     cursor:pointer;
+}
+
+.close{
+    margin-top:10px;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#333;
+    color:white;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#888;
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-<h2>Solicitar Editor</h2>
+<header>
+    <div class="logo">🎬 Ateliê dos Editores</div>
+    <div class="subtitle">
+        Conectando clientes e editores.
+    </div>
+</header>
 
-<form id="pedidoForm">
+<section class="hero">
 
-<label>Nome</label>
-<input type="text" id="nome" required>
+<h1>
+Encontre um <span>Editor</span>
+ou um <span>Cliente</span>
+em poucos cliques.
+</h1>
 
-<label>Discord</label>
-<input type="text" id="discord" required>
+<p>
+Publique pedidos e encontre oportunidades rapidamente.
+</p>
 
-<label>Tipo de Vídeo</label>
-<input type="text" id="tipo" required>
+<div class="buttons">
+    <button class="btn editor" onclick="abrirEditor()">
+        🎥 Pedir Editor
+    </button>
 
-<label>Duração</label>
-<input type="text" id="duracao" required>
-
-<label>Prazo</label>
-<input type="text" id="prazo" required>
-
-<label>Orçamento</label>
-<input type="text" id="orcamento" required>
-
-<label>Detalhes</label>
-<textarea id="detalhes"></textarea>
-
-<button type="submit">Enviar Pedido</button>
-
-</form>
+    <button class="btn cliente" onclick="abrirCliente()">
+        👤 Pedir Cliente
+    </button>
 </div>
 
-<script src="script.js"></script>
+</section>
+
+<section class="cards">
+
+<div class="card">
+<h3>⚡ Rápido</h3>
+<p>Pedidos enviados instantaneamente pelo webhook.</p>
+</div>
+
+<div class="card">
+<h3>🎬 Profissional</h3>
+<p>Feito exclusivamente para editores de vídeo.</p>
+</div>
+
+<div class="card">
+<h3>🤝 Conexão</h3>
+<p>Junte clientes e editores em um só lugar.</p>
+</div>
+
+</section>
+
+<div class="modal" id="modal">
+
+<div class="form-box">
+
+<h2 id="titulo">Pedido</h2>
+
+<form id="formulario">
+
+<input type="text" id="nome" placeholder="Nome" required>
+
+<input type="text" id="discord" placeholder="Discord" required>
+
+<input type="text" id="tipo" placeholder="Tipo de vídeo ou cliente" required>
+
+<input type="text" id="orcamento" placeholder="Orçamento">
+
+<textarea id="detalhes" placeholder="Detalhes"></textarea>
+
+<button class="send" type="submit">
+Enviar Pedido
+</button>
+
+<button type="button" class="close" onclick="fecharModal()">
+Fechar
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Ateliê dos Editores
+</footer>
+
+<script>
+
+const WEBHOOK = "COLE_SEU_WEBHOOK_AQUI";
+
+let tipoPedido = "";
+
+function abrirEditor(){
+    tipoPedido = "PEDIDO DE EDITOR";
+    document.getElementById("titulo").innerText = "🎥 Pedir Editor";
+    document.getElementById("modal").style.display="flex";
+}
+
+function abrirCliente(){
+    tipoPedido = "PEDIDO DE CLIENTE";
+    document.getElementById("titulo").innerText = "👤 Pedir Cliente";
+    document.getElementById("modal").style.display="flex";
+}
+
+function fecharModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+document.getElementById("formulario")
+.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const nome = document.getElementById("nome").value;
+const discord = document.getElementById("discord").value;
+const tipo = document.getElementById("tipo").value;
+const orcamento = document.getElementById("orcamento").value;
+const detalhes = document.getElementById("detalhes").value;
+
+await fetch(WEBHOOK,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+embeds:[{
+title:tipoPedido,
+color:10038562,
+fields:[
+{
+name:"👤 Nome",
+value:nome
+},
+{
+name:"💬 Discord",
+value:discord
+},
+{
+name:"📌 Tipo",
+value:tipo
+},
+{
+name:"💰 Orçamento",
+value:orcamento || "Não informado"
+},
+{
+name:"📝 Detalhes",
+value:detalhes || "Nenhum"
+}
+],
+timestamp:new Date()
+}]
+})
+});
+
+alert("Pedido enviado com sucesso!");
+fecharModal();
+
+});
+
+</script>
 
 </body>
 </html>
